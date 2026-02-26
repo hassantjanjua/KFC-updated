@@ -13,7 +13,7 @@ import {
 export default function Footer() {
   return (
     <footer className="w-full 
-                       bg-gradient-to-b from-black via-red-950 to-black
+                       bg-gradient-to-r from-black via-red-900 to-black
                        border-t border-red-500/20
                        text-white relative overflow-hidden">
 

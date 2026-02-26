@@ -35,23 +35,27 @@ export default function FoodMarqueeAndBanners() {
       </div>
 
       {/* Food Marquee */}
-      <div className="relative mb-12 overflow-hidden perspective-1000">
+      <div className="relative mb-12 overflow-visible perspective-1000">
         <div className="marquee flex gap-16 items-center">
           {[...foods, ...foods].map((food, index) => (
             <div
               key={index}
-              className="group relative flex-shrink-0 flex flex-col items-center transition-transform duration-500 hover:scale-110 hover:-translate-y-2 hover:rotate-3"
+              className="group relative flex-shrink-0 flex flex-col items-center transition-transform duration-500 hover:scale-110 hover:-translate-y-2 hover:rotate-3 hover:z-10"
             >
-              <div className="w-36 h-36 overflow-hidden rounded-full border-2 border-red-600 shadow-2xl bg-black/20 flex items-center justify-center">
-                {/* Glow behind image */}
-                <div className="absolute w-36 h-36 rounded-full bg-red-500/20 blur-2xl -z-10 animate-pulse"></div>
-                <Image
-                  src={food.image}
-                  alt={food.name}
-                  width={144}
-                  height={144}
-                  className="object-cover w-full h-full"
-                />
+              <div className="relative w-36 h-36 flex items-center justify-center">
+                {/* Glow Circle */}
+                <div className="absolute w-36 h-36 rounded-full bg-red-500/20 blur-2xl animate-pulse -z-10"></div>
+
+                {/* Circular Image */}
+                <div className="w-36 h-36 rounded-full border-2 border-red-600 overflow-hidden shadow-2xl flex items-center justify-center bg-black/20">
+                  <Image
+                    src={food.image}
+                    alt={food.name}
+                    width={144}
+                    height={144}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
               </div>
               <span className="mt-2 text-white font-bold text-center text-lg md:text-xl drop-shadow-md">
                 {food.name}
@@ -86,23 +90,22 @@ export default function FoodMarqueeAndBanners() {
       {/* Animation Style */}
       <style jsx>{`
         .marquee {
-          animation: scroll 20s linear infinite;
+          animation: scroll-right 20s linear infinite;
         }
 
         .marquee:hover {
           animation-play-state: paused;
         }
 
-        @keyframes scroll {
+        @keyframes scroll-right {
           0% {
-            transform: translateX(0%);
+            transform: translateX(-50%);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(0%);
           }
         }
 
-        /* Perspective effect for marquee */
         .perspective-1000 {
           perspective: 1000px;
         }

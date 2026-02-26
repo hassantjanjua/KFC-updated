@@ -55,7 +55,7 @@ export default function Review() {
           {reviews.map((rev) => (
             <div
               key={rev.id}
-              className="w-full md:w-[45%] relative bg-black/30 p-5 rounded-2xl shadow-2xl border border-red-600 transform transition duration-500 hover:scale-105 cursor-pointer"
+              className="w-full md:w-[45%] relative bg-black/30 p-5 rounded-2xl border border-red-600 shadow-2xl transform transition duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1 cursor-pointer hover:shadow-glow"
             >
               {/* App logo */}
               <div className="flex justify-center mb-4 relative z-10">
@@ -86,8 +86,11 @@ export default function Review() {
         <div className="flex justify-center lg:justify-end relative">
           <div
             onClick={() => setOpen(true)}
-            className="relative w-full md:w-[450px] h-[270px] cursor-pointer rounded-3xl overflow-hidden shadow-2xl border-4 border-red-600 transform transition duration-500 hover:scale-105 hover:-translate-y-1"
+            className="relative w-full md:w-[450px] h-[270px] cursor-pointer rounded-3xl overflow-hidden shadow-2xl border-4 border-red-600 transform transition duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1"
           >
+            {/* Glass/Glow behind video */}
+            <div className="absolute inset-0 bg-black/50 rounded-3xl shadow-glow animate-pulse"></div>
+
             {/* Video Thumbnail */}
             <Image
               src="/KFC-logo.webp"
@@ -97,16 +100,19 @@ export default function Review() {
               unoptimized
             />
 
-            {/* Play Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <Image
-                src="/play-overlay.png"
-                alt="Play Icon Overlay"
-                width={100}
-                height={100}
-                className="object-contain opacity-90 transition-transform duration-500 hover:scale-110"
-                unoptimized
-              />
+            {/* Play Button Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-red-500/80 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="white"
+                  viewBox="0 0 24 24"
+                  strokeWidth={0}
+                  className="w-12 h-12 ml-1"
+                >
+                  <path d="M5 3v18l15-9L5 3z" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -114,10 +120,10 @@ export default function Review() {
 
       {/* Video Popup */}
       {open && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-50">
-          <div className="relative w-[90%] md:w-[900px] aspect-video">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-50 transition-opacity duration-500">
+          <div className="relative w-[90%] md:w-[900px] aspect-video rounded-xl shadow-2xl overflow-hidden animate-scale-in">
             <iframe
-              className="w-full h-full rounded-xl shadow-2xl"
+              className="w-full h-full"
               src="https://www.youtube.com/embed/crb-ydXQzj0"
               title="KFC Pakistan Review"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -126,13 +132,25 @@ export default function Review() {
           </div>
           <button
             onClick={() => setOpen(false)}
-            className="absolute top-6 right-6 text-white text-3xl font-bold"
+            className="absolute top-6 right-6 text-white text-4xl font-bold hover:scale-110 transition-transform duration-300"
           >
             ✕
           </button>
         </div>
       )}
 
+      <style jsx>{`
+        @keyframes scale-in {
+          0% { transform: scale(0.8); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-scale-in {
+          animation: scale-in 0.3s ease-out forwards;
+        }
+        .shadow-glow {
+          box-shadow: 0 0 40px rgba(255,0,0,0.6);
+        }
+      `}</style>
     </section>
   )
 }
