@@ -11,9 +11,8 @@ export default function Download() {
         {/* LEFT SIDE - APP IMAGE */}
         <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 bg-black/40 border border-red-600 rounded-3xl shadow-2xl flex items-center justify-center">
 
-          {/* Image Wrapper (overflow outside effect) */}
+          {/* Image Wrapper */}
           <div className="absolute -top-8 -right-8 w-[115%] h-[115%] transition duration-500 hover:scale-105 hover:-translate-y-3">
-
             <Image
               src="/kfc-cover.jpg"
               alt="App Preview"
@@ -21,7 +20,6 @@ export default function Download() {
               className="object-cover rounded-3xl shadow-2xl transition duration-500"
               priority
             />
-
           </div>
         </div>
 
@@ -39,30 +37,32 @@ export default function Download() {
           </p>
 
           {/* Download Buttons */}
-          <div className="flex gap-4 sm:gap-6 flex-wrap justify-center md:justify-start">
+          <div className="flex gap-4 justify-center md:justify-start w-full">
             <a
               href="https://apps.apple.com/pk/app/kfc-pakistan/id1480491422"
               target="_blank"
-              className="hover:scale-105 transition duration-300"
+              className="w-[160px] h-[50px] hover:scale-105 transition duration-300"
             >
               <Image
                 src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                 alt="Download on the App Store"
                 width={160}
                 height={50}
+                className="w-full h-full object-contain"
               />
             </a>
 
             <a
               href="https://play.google.com/store/apps/details?id=io.bramerz.kfc"
               target="_blank"
-              className="hover:scale-105 transition duration-300"
+              className="w-[160px] h-[50px] hover:scale-105 transition duration-300"
             >
               <Image
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 alt="Get it on Google Play"
-                width={180}
+                width={160}
                 height={50}
+                className="w-full h-full object-contain"
               />
             </a>
           </div>

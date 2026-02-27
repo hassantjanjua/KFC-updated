@@ -3,7 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -54,24 +53,45 @@ export default function Navbar() {
           Order Now
         </button>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Animated Hamburger */}
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setOpen(!open)}
-            className="text-white p-2 transition-transform duration-300 hover:scale-110"
+            className="relative w-10 h-10 flex items-center justify-center group"
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
+            {/* Glow background */}
+            <span className="absolute inset-0 rounded-full bg-red-600/10 blur-md opacity-0 group-hover:opacity-100 transition duration-300"></span>
+
+            <div className="relative w-7 h-7 flex items-center justify-center">
+              {/* Top Line */}
+              <span
+                className={`absolute h-[2px] w-7 bg-white rounded transition-all duration-300 ease-in-out
+                ${open ? "rotate-45" : "-translate-y-2"}`}
+              ></span>
+
+              {/* Middle Line */}
+              <span
+                className={`absolute h-[2px] w-7 bg-white rounded transition-all duration-300 ease-in-out
+                ${open ? "opacity-0" : ""}`}
+              ></span>
+
+              {/* Bottom Line */}
+              <span
+                className={`absolute h-[2px] w-7 bg-white rounded transition-all duration-300 ease-in-out
+                ${open ? "-rotate-45" : "translate-y-2"}`}
+              ></span>
+            </div>
           </button>
         </div>
       </nav>
 
-      {/* Animated Mobile Menu with Gradient + Glow */}
+      {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out
                     ${open ? "max-h-[500px] py-6" : "max-h-0 py-0"}`}
       >
-        <div className="relative bg-gradient-to-r from-black/80 via-red-900/80 to-black/80 border-t border-red-500/20 rounded-b-xl shadow-lg">
-          {/* Glow circles behind mobile menu */}
+        <div className="relative bg-gradient-to-r from-black/90 via-red-900/90 to-black/90 border-t border-red-500/20 rounded-b-xl shadow-lg">
+          {/* Glow Effects */}
           <div className="absolute top-0 left-0 w-48 h-48 bg-red-600/10 blur-3xl rounded-full -z-10"></div>
           <div className="absolute bottom-0 right-0 w-48 h-48 bg-red-800/10 blur-3xl rounded-full -z-10"></div>
 
@@ -84,7 +104,7 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            {/* Mobile CTA Button */}
+            {/* Mobile CTA */}
             <li>
               <button className="w-full px-6 py-3 bg-white text-black rounded-full font-semibold 
                                  hover:bg-transparent hover:text-white hover:border hover:border-white transition-all duration-300">
